@@ -53,7 +53,6 @@ userSchema.methods.checkPassword = function(password) {
             if(err){
                 return reject(err)
             }
-
             resolve(same)
         })
     })

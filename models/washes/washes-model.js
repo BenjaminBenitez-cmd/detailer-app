@@ -14,7 +14,11 @@ const washSchema = new mongoose.Schema(
             enum: ['active', 'completed', 'pastdue'],
             default: 'active'
         },
-        location: {
+        latitude: {
+            type: String,
+            required: true
+        },
+        longitude: {
             type: String,
             required: true
         },

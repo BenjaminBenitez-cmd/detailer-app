@@ -75,7 +75,6 @@ module.exports.protect = async (req, res, next) => {
     let payload
     try {
       payload = await verifyToken(token)
-      console.log(payload)
     } catch (e) {
       return res.status(401).end()
     }

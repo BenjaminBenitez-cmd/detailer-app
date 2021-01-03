@@ -1,9 +1,10 @@
+require('dotenv').config()
 const express = require('express');
 const db = require('./utils/config');
 const userRouter = require('./models/user/user-router')
 const listRouter = require('./models/list/list-router')
 const washesRouter = require('./models/washes/washes-router')
-const Port = 3000;
+const Port = process.env.PORT
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')

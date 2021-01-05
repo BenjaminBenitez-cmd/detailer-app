@@ -88,7 +88,7 @@ function App(){
             <Route exact path="/register" component={Register}/>
             <Route exact path="/profile" component={Profile}/>
             {/* <Route exact path="/dashboard" component={DetailerUser}/> */}
-            <GuardedRoute path='/dashboard' component={DetailerUser} isAuthenticated={currentUser}/>
+            <GuardedRoute path='/dashboard' component={DetailerUser} />
             <Route exact path="/schedule" component={Schedule} />
           </Switch>
       </div>

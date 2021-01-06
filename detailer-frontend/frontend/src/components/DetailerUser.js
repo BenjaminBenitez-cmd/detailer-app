@@ -1,14 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import authService from '../services/auth.service';
 import Card from '../ui-components/Card';
 
 function DetailerUser(){
     // const [content, setContent] = useState([]);
     // const [loading, setLoading] = useState(false);
     // const [successful, setSuccessful] = useState("");
+    const history = useHistory();
 
-    // useEffect(() => {
-    //     setContent(FakeAPI.data);
-    // }, []);
+    const user = authService.getCurrentUser();
+    if(!user) {
+        history.push("/signin");
+    }
 
     return (
         <div className="container">

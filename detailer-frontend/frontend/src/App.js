@@ -60,9 +60,9 @@ function App(){
               {/* <a href="/" className="nav-link" onClick={logOut}>
                 Logout
               </a> */}
-              <Link to={"/"} className="nav-link" onClick={logOut}>
+              <a href="/" className="nav-link" onClick={logOut}>
                 Logout
-              </Link>
+              </a>
             </li>
           </div>
         ):(
@@ -87,8 +87,7 @@ function App(){
             <Route exact path="/signin" component={Signin}/>
             <Route exact path="/register" component={Register}/>
             <Route exact path="/profile" component={Profile}/>
-            {/* <Route exact path="/dashboard" component={DetailerUser}/> */}
-            <GuardedRoute path='/dashboard' component={DetailerUser} isAuthenticated={currentUser}/>
+            <Route exact path="/dashboard" component={DetailerUser}/>
             <Route exact path="/schedule" component={Schedule} />
           </Switch>
       </div>

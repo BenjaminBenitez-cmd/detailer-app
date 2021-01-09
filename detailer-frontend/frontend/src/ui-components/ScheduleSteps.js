@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ScheduleSteps(){
+function ScheduleSteps(props){
     return (
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        <div className="progress mt-3 mb-3">
+            <div className="progress-bar" role="progressbar" style={{width: props.valueNow + "%"}} aria-valuenow={props.valueNow} aria-valuemin="0" aria-valuemax="100">{props.valueNow}%</div>
         </div>
     )
 }

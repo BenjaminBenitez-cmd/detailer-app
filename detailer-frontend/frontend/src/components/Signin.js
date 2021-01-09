@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import AuthService from '../services/auth.service';
-import validate from "../services/auth.validators";
+import { login }  from '../services/auth.service';
+import { checkForBoth } from "../services/auth.validators";
 
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="start">
-         The field is required
-      </div>
-    );
-  }
-};
+// const required = (value) => {
+//   if (!value) {
+//     return (
+//       <div className="alert alert-danger" role="start">
+//          The field is required
+//       </div>
+//     );
+//   }
+// };
 
 const Signin = (props) => {
   const [email, setEmail] = useState("");
@@ -33,9 +33,9 @@ const Signin = (props) => {
     setMessage("");
     setLoading(true);
     //check if email is valid with validate function
-    const isValid = validate.checkForBoth(email, password);
+    const isValid = checkForBoth(email, password);
     if (isValid.length === 0){
-      AuthService.login(email, password).then(
+      login(email, password).then(
         () => {
           props.history.push("dashboard");
           window.location.reload();

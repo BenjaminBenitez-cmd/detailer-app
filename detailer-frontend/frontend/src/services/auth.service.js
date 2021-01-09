@@ -1,16 +1,16 @@
 import axios from 'axios';
-import API_URL from '../config';
+import { apiPath } from '../config';
 
-const register = (email, password)  => {
-    return axios.post(API_URL + "/signup", {
+export const register = (email, password)  => {
+    return axios.post(apiPath + "/signup", {
         email: email,
         password: password
     });
     
 };
 
-const login = (email, password) => {
-    return axios.post(API_URL + "/signin", {
+export const login = (email, password) => {
+    return axios.post(apiPath + "/signin", {
         email: email,
         password: password
     })
@@ -23,17 +23,19 @@ const login = (email, password) => {
 };
 
 
-const logout = () => {
+export const logout = () => {
     localStorage.removeItem("user");
 };
 
-const getCurrentUser = () => {
+export const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"))
 };
 
-export default {
-    register,
-    login,
-    logout,
-    getCurrentUser
-};
+// export default {
+//     register,
+//     login,
+//     logout,
+//     getCurrentUser
+// };
+
+

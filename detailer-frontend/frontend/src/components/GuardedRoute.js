@@ -1,12 +1,12 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import AuthService from '../services/auth.service';
+import  { getCurrentUser }  from '../services/auth.service';
 
 function GuardedRoute({
     component: Component,
     ...rest
 }){
-    const user = AuthService.getCurrentUser();
+    const user = getCurrentUser();
     return (
         <Route {...rest} render={(props) => (
             user !== null

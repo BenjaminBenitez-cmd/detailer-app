@@ -1,4 +1,4 @@
-const checkIfEmpty = (value) => {
+export const checkIfEmpty = (value) => {
     if(value.trim() === ""){
         return false;
     } else {
@@ -6,7 +6,7 @@ const checkIfEmpty = (value) => {
     }
 };
 
-const checkForBoth = (email, password) => {
+export const checkForBoth = (email, password) => {
     let errors =[];
     if(!/\S+@\S*\.\S+/.test(email)){
         errors.push("Invalid email");
@@ -21,7 +21,3 @@ const checkForBoth = (email, password) => {
     return errors
 }
 
-export default {
-    checkIfEmpty,
-    checkForBoth
-}

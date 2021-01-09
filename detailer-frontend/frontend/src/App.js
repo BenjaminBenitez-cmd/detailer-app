@@ -3,29 +3,34 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
-import AuthService from './services/auth.service';
+import  { getCurrentUser, logout } from './services/auth.service';
 
 import Signin from './components/Signin';
 import Register from './components/Register';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import DetailerUser from './components/DetailerUser';
-import Schedule from './components/ScheduleUser';
+import Schedule from './components/Schedule';
+import ScheduleTwo from './components/ScheduleStep-2';
 import GuardedRoute from './components/GuardedRoute';
+import ScheduleThree from './components/ScheduleStep-3';
+import ScheduleOrder from './components/ScheduleConfirm';
+import ViewWashes from './components/ViewWashes';
+import ViewWash from './components/ViewWash';
 
 function App(){
+
   const [currentUser, setCurrentUser] = useState(undefined);
   
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
+    const user = getCurrentUser();
     if(user){
       setCurrentUser(user);
     }
   }, []);
 
   const logOut = () => {
-    AuthService.logout();
+    logout();
   };
 
   return (
@@ -60,9 +65,9 @@ function App(){
               {/* <a href="/" className="nav-link" onClick={logOut}>
                 Logout
               </a> */}
-              <a href="/" className="nav-link" onClick={logOut}>
+              <Link to="/" className="nav-link" onClick={logOut}>
                 Logout
-              </a>
+              </Link>
             </li>
           </div>
         ):(
@@ -87,8 +92,15 @@ function App(){
             <Route exact path="/signin" component={Signin}/>
             <Route exact path="/register" component={Register}/>
             <Route exact path="/profile" component={Profile}/>
-            <Route exact path="/dashboard" component={DetailerUser}/>
+            {/* <Route exact path="/dashboard" component={DetailerUser}/> */}
+            <GuardedRoute path='/dashboard' component={DetailerUser} />
             <Route exact path="/schedule" component={Schedule} />
+            <Route exact path="/schedule/car/:car" component={ScheduleTwo} />
+            <Route exact path="/schedule/location" component={ScheduleThree} />
+            <Route exact path="/schedule/order" component={ScheduleOrder} />
+            <Route exact path="/washes" component={ViewWashes} />
+            <Route exact path="/washes/:id" component={ViewWash} />
+
           </Switch>
       </div>
     </div>

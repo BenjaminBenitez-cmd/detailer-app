@@ -1,14 +1,15 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import  { getCurrentUser }  from '../services/auth.service';
 
 function GuardedRoute({
     component: Component,
-    isAuthenticated,
     ...rest
 }){
+    const user = getCurrentUser();
     return (
         <Route {...rest} render={(props) => (
-            isAuthenticated !== undefined
+            user !== null
                 ? <Component {...props}/>
                 : <Redirect to='/signin' />
         )}/>

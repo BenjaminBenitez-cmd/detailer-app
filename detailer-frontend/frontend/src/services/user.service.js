@@ -1,25 +1,34 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import path from '../config'
+import { apiPath } from '../config'
 
-const API_URL = path + "/api"
+const API_URL = apiPath + "/api";
 
-const getUserLists = () => {
+export const getUserLists = () => {
     return axios.get(API_URL + "/list", { headers: authHeader() });
 };
 
-const getUserWashes = () => {
+export const getUserWashes = () => {
     return axios.get(API_URL + "/washes", { headers: authHeader() });
 };
 
-const postUserList = (listName) => {
+export const postUserList = (listName) => {
     return axios.post(API_URL + "/list", { 
         name: listName,
         headers: authHeader()
     });
 };
 
-const postUserWash = (name, location, status) => {
+export const isSuccessful = (position) => {
+     
+    return position.coords;
+}
+
+export const getUserLocation = (callback) => {
+    return navigator.geolocation.getCurrentPosition((position) => callback(position));
+}
+
+export const postUserWash = (name, location, status) => {
     return axios.post(API_URL + "/washes", {
         headers: authHeader(),
         name: name,
@@ -28,9 +37,3 @@ const postUserWash = (name, location, status) => {
     });
 };
 
-export default {
-    getUserLists,
-    getUserWashes,
-    postUserList,
-    postUserWash,
-};

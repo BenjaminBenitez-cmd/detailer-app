@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import validate from '../services/auth.validators';
+import { checkForBoth} from '../services/auth.validators';
 
-import AuthService from '../services/auth.service';
+import { register }  from '../services/auth.service';
 
 function Register(){
     const [email, setEmail] = useState("");
@@ -25,10 +25,10 @@ function Register(){
         setMessage("");
         setSuccessful(false);
 
-        const isValid = validate.checkForBoth(email, password);
+        const isValid = checkForBoth(email, password);
 
         if(isValid.length === 0){
-            AuthService.register(email, password).then(
+            register(email, password).then(
                 (response) => {
                     setMessage(response.data.message);
                     setSuccessful(true);

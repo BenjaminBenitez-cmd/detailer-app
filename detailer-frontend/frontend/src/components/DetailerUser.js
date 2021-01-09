@@ -27,14 +27,14 @@ function DetailerUser(){
                     image={"https://images.unsplash.com/photo-1584299789116-c34af66e6046?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"}
                     title={"View washes"}
                     paragraph={"Make payment view wash and view wash progress."}
-                    link={"schedule"}
+                    link={"washes"}
 
                 />
                 <Card 
                     image={"https://images.unsplash.com/photo-1605437211365-7257403ea287?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"}
                     title={"Profile"}
                     paragraph={"Your profile settings"}
-                    link={"schedule"}
+                    link={"profile"}
 
                 />
             </div>

@@ -5,7 +5,7 @@ function CardWash(props){
     return (
         <div className="card" >
             <div className="card-header">
-                {props.list}
+                {props.carType}
             </div>
             <div className="card-body">
                 <h5 className="card-title">{props.carType}</h5>

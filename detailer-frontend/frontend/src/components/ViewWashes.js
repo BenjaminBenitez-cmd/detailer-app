@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import API from '../FakeAPI';
+import { getUserWashes } from '../services/user.service';
 import CardWash from '../ui-components/CardWash';
 
 function ViewWashes(){
-    const [results, setResults ] = useState("pending");
+    const [results, setResults ] = useState("active");
     const [content, setContent ] = useState([]);
 
     const handleNavClick = (e) => {
@@ -15,21 +16,24 @@ function ViewWashes(){
     };
 
     useEffect(() => {
-        const data = API.data;
         let newData = [];
-        data.forEach((element) => {
-            if(element.list === results){
+        let newArray = [];
+        getUserWashes()
+        .then((response) => {
+            console.log(response.data.data);
+            response.data.data.forEach((element) => {
+              if(element.status === results){
                 newData.push(element);
-            }
-        })
-        setContent(newData);
+              }
+            })
+        }).then(() => setContent(newData))
     }, [results]);
 
     return (
         <div className="container">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
-                <a className="nav-link active" id="pending" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" onClick={handleNavClick}>Pending</a>
+                <a className="nav-link active" id="active" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" onClick={handleNavClick}>Pending</a>
             </li>
             <li className="nav-item" role="presentation">
                 <a className="nav-link" id="completed" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" onClick={handleNavClick}>Completed</a>
@@ -43,11 +47,11 @@ function ViewWashes(){
                     {
                         content.map((element) => (
                             <CardWash 
-                                key={element.id}
-                                id={element.id} 
+                                key={element._id}
+                                id={element._id} 
                                 list={element.list} 
-                                carType={element.carType} 
-                                time={element.time}
+                                carType={element.name} 
+                                time={element.due}
                             />
                         ))
                     }

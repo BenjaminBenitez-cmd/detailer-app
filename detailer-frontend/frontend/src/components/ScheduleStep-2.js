@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ScheduleSteps from '../ui-components/ScheduleSteps';
 
-function ScheduleStepTwo(){
-    const { car } = useParams();
+function ScheduleStepTwo(props){
+    const { car } = props.location.state;
     
 
     return (

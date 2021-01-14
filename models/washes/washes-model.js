@@ -8,6 +8,11 @@ const washSchema = new mongoose.Schema(
             trim: true,
             maxlength: 50
         },
+        carType: {
+            type: String,
+            required: true, 
+            enum: ['coop', 'truck', 'truck', 'sportsCar']
+        },
         status: {
             type: String,
             required: true,

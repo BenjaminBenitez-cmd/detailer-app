@@ -31,10 +31,11 @@ function App(){
 
   const logOut = () => {
     logout();
+    window.location.reload();
   };
 
   return (
-    <div>
+    <div className="outerContainer">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="nav-brand">
           Detailer
@@ -49,7 +50,7 @@ function App(){
           {currentUser && (
             <li className="nav-item">
               <Link to={"/dashboard"} className="nav-link">
-                dashboard
+                Dashboard
               </Link>
             </li>
           )}
@@ -58,7 +59,7 @@ function App(){
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {currentUser.username} || Test name
+                {currentUser.user.email}
               </Link>
             </li>
             <li className="nav-item">
@@ -86,7 +87,7 @@ function App(){
           </div>
         )}
       </nav>
-      <div className="container mt-3">
+      <div className="inner-body">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home}/>
             <Route exact path="/signin" component={Signin}/>
@@ -95,7 +96,7 @@ function App(){
             {/* <Route exact path="/dashboard" component={DetailerUser}/> */}
             <GuardedRoute path='/dashboard' component={DetailerUser} />
             <Route exact path="/schedule" component={Schedule} />
-            <Route exact path="/schedule/car/:car" component={ScheduleTwo} />
+            <Route exact path="/schedule/car" component={ScheduleTwo} />
             <Route exact path="/schedule/location" component={ScheduleThree} />
             <Route exact path="/schedule/order" component={ScheduleOrder} />
             <Route exact path="/washes" component={ViewWashes} />

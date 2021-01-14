@@ -6,8 +6,9 @@ const router = express.Router();
 router 
     .route('/')
     .post(controller.createUser)
-    .get((req, res) => {
-        res.send('Route connected')
-    })
+
+router	
+    .route('/me')
+    .get(controller.me)
 
 module.exports = router;

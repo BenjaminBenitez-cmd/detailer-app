@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ScheduleSteps from '../ui-components/ScheduleSteps';
-import API from '../FakeAPI';
+import { getUserWash } from '../services/user.service';
 
 function ViewWash(){
     const { id } = useParams();
     const [content, setContent ] = useState({});
     
     const progressConverter = (condition) => {
-        
         switch (condition) {
             case "washing":
                 return 50;
@@ -25,34 +24,40 @@ function ViewWash(){
                 return 100;
         }
     };
+    const isPaid = (condition) => {
+        if(condition){
+            return "paid"
+        } 
+        return "Pending"
+    }
 
     useEffect(() => {
-        const data = API.data;
-        let newData = {};
-        data.forEach((element) => {
-            if(element.id === Number(id)){
-                newData = element;
-            }
-        });
-        setContent(newData);
-    }, []);
+        getUserWash(id)
+        .then((response) => {
+            setContent(response.data.data);
+        })
+    }, [id]);
     
     return (
         <div className="container">
-            <h1>{content.carType}</h1>
+            <h1>{content.name}</h1>
             <ScheduleSteps valueNow={progressConverter(content.status)}/>
             <p>
-                <strong>Car Type: </strong>{content.carType}
+                <strong>Car Type: </strong>{content.name}
             </p>
             <p>
-                <strong>Time: </strong>{content.time}
+                <strong>Time: </strong>{content.due}
             </p>
             <p>
                 <strong>Wash Type: </strong>{content.washType}
             </p>
             <p>
-                <strong>Payment: </strong>{content.payment}
+                <strong>Payment: </strong>{isPaid(content.paid)}
             </p>
+            <p>
+                <strong>Location: </strong> Placeholder location
+            </p>
+            <Link to="/washes" className="btn btn-primary">Go back</Link>
         </div>
     )
     

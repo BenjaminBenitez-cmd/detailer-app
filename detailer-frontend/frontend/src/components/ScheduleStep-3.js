@@ -1,47 +1,90 @@
-import React from 'react';
-import ScheduleSteps from '../ui-components/ScheduleSteps';
+import React, { useEffect, useRef, useState } from 'react';
 import { mapboxBoxToken } from '../config';
 import mapboxgl from "mapbox-gl";
+// import 'mapbox-gl/dist/mapbox-gl.css';
 import { Link } from 'react-router-dom';
 
 mapboxgl.accessToken = mapboxBoxToken;
 
+
 function ScheduleStepThree(props){
+    const information = props.location.state;
+    const mapContainerRef = useRef("");
+    const [longitude, setLongitude] = useState("");
+    const [latitude, setLatitude] = useState("");
+
+     useEffect(() => {
+        if ("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(position => {
+                setLongitude(position.coords.longitude);
+                setLatitude(position.coords.latitude);                
+                let map = new mapboxgl.Map({
+                    container: mapContainerRef.current,
+                    // See style options here: https://docs.mapbox.com/api/maps/#styles
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [longitude, latitude],
+                    zoom: 12.5,
+                  });
+                  
+                //   var el = document.querySelector('.markerbox');
+                //   el.classList.add('marker');
+
+                  // make a marker for each feature and add to the map
+                  new mapboxgl.Marker()
+                      .setLngLat([longitude, latitude])
+                      .addTo(map);
+        
+                 // Add geolocate control to the map.
+                map.addControl(
+                    new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                        enableHighAccuracy: true
+                        },
+                        trackUserLocation: true,
+                        showUserLocation:true
+                    })
+                );
+
+                // add navigation control (the +/- zoom buttons)
+                map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+
+                return () => map.remove();       
+            })
+        }  else {
+
+        }
+    }, [latitude, longitude])
     
-     const { car, typeOfWash } =  props.location.state;
-     const longitude = "89.8983";
-     const latitude = "-89";
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <ScheduleSteps valueNow={"75"} />
-                    <h1 className="text-center">Confirm Location</h1>
-                    <p className="text-center">This is the location where we will wash your car</p>
-                </div>
-                <div className="col-md-12">
-                    
-                </div>
-                <div className="col-md-12 d-flex justify-content-center align-items-center">
-                    <Link to="/" className="btn btn-danger  mr-2">Cancel</Link>
-                    <Link 
-                     to={{
-                         pathname:"/schedule/order",
-                         state:{
-                             car: car,
-                             typeOfWash: typeOfWash,
-                             latitude: latitude,
-                             longitude: longitude
-                         }
-                     }}
-                     className="btn btn-primary"
-                     >
-                    Confirm
-                    </Link>
-                </div>
-            </div>
-        </div> 
+    <>
+    <div className="mapContainer" ref={(el) => (mapContainerRef.current = el)}>
+        <div className="markerbox"></div>
+    </div> 
+    <div className="card fixed-bottom" style={{width: "30rem", margin: "0 auto"}}>
+        <div className="card-header">
+            Confirm Location
+        </div>  
+        <div className="card-body">
+            <h5 className="card-title">Location</h5>
+            <p className="card-text">San Lazaro village, Orange Walk Belize</p>
+            {
+              longitude && <Link 
+              to={{
+                  pathname: "/schedule/order",
+                  state:{
+                      ...information,
+                      longitude: longitude,
+                      latitude: latitude
+                  }
+              }}
+              className="btn btn-primary"
+              >Confirm</Link>
+            }
+            
+        </div>
+    </div>
+    </>
     )
 }
 

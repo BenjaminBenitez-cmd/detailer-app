@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ScheduleSteps from '../ui-components/ScheduleSteps';
 
-function ScheduleStepTwo(){
-    const { car } = useParams();
+function ScheduleStepTwo(props){
+    const information = props.location.state;
     
 
     return (
@@ -23,8 +23,8 @@ function ScheduleStepTwo(){
                             to={{
                                 pathname: "/schedule/location",
                                 state: {
-                                    car: car,
-                                    typeOfWash: "now"
+                                    ...information,
+                                    due: "now"
                                 }
                             }} 
                             className="btn btn-primary"
@@ -42,8 +42,8 @@ function ScheduleStepTwo(){
                             to={{
                                 pathname: "/schedule/location",
                                 state: {
-                                    car: car,
-                                    typeOfWash: "now"
+                                    ...information,
+                                    due: "now"
                                 }
                             }} 
                             className="btn btn-primary"

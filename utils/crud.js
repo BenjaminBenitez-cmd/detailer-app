@@ -2,7 +2,7 @@
 const getOne = model => async (req, res) => {
     try{
         const doc = await model 
-            .findOne({ createBy: req.user._id, _id: req.params.id })
+            .findOne({ createdBy: req.user._id, _id: req.params.id })
             .lean()
             .exec()
         

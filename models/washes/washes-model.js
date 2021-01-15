@@ -8,11 +8,22 @@ const washSchema = new mongoose.Schema(
             trim: true,
             maxlength: 50
         },
+        carType: {
+            type: String,
+            required: true, 
+            enum: ['coop', 'truck', 'SUV', 'sportsCar']
+        },
         status: {
             type: String,
             required: true,
             enum: ['active', 'completed', 'pastdue'],
             default: 'active'
+        },
+        work:{
+            type: String,
+            required: true,
+            enum: ['just started', 'waxing car', 'finished', 'drying', 'washing'],
+            default: 'just started'   
         },
         latitude: {
             type: String,
@@ -22,7 +33,10 @@ const washSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        due: Date,
+        due: {
+            type: String,
+            default: 'Express'
+        },
         paid: {
             type: Boolean,
             default: false
@@ -32,15 +46,10 @@ const washSchema = new mongoose.Schema(
             ref: 'user',
             required: true
         },
-        list: {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: 'list',
-            required: true
-        }
     },
     { timestamps: true }
 )
 
-washSchema.index({ list: 1, name: 1 }, {unique: true })
+washSchema.index({ user: 1, name: 1 }, {unique: true })
 
 module.exports = mongoose.model('wash', washSchema)

@@ -43,7 +43,7 @@ module.exports.signin = async (req, res) => {
     
     try {
         const user = await User.findOne({ email: req.body.email })
-        .select('email password')
+        .select('email password settings id')
         .exec()
     
         if (!user) {
@@ -57,7 +57,7 @@ module.exports.signin = async (req, res) => {
         }
     
         const token = newToken(user)
-        return res.status(201).send({ token })
+        return res.status(201).send({ token, user: { email: user.email, settings: user.settings, id: user._id } })
     } catch (e) {
         console.error(e)
         res.status(500).end()

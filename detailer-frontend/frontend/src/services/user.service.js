@@ -16,6 +16,13 @@ export const getUserWash = (id) => {
     return axios.get(API_URL + `/washes/${id}`, { headers: authHeader() });
 }
 
+export const postUserWash = (info) => {
+    return axios.post(API_URL + `/washes`, {
+        ...info,
+        headers:authHeader()
+    })
+}
+
 export const postUserList = (listName) => {
     return axios.post(API_URL + "/list", { 
         name: listName,
@@ -31,13 +38,4 @@ export const isSuccessful = (position) => {
 export const getUserLocation = (callback) => {
     return navigator.geolocation.getCurrentPosition((position) => callback(position));
 }
-
-export const postUserWash = (name, location, status) => {
-    return axios.post(API_URL + "/washes", {
-        headers: authHeader(),
-        name: name,
-        location: location,
-        status: status, 
-    });
-};
 

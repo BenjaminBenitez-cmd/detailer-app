@@ -99,7 +99,7 @@ function App(){
             <Route exact path="/schedule/car" component={ScheduleTwo} />
             <Route exact path="/schedule/location" component={ScheduleThree} />
             <Route exact path="/schedule/order" component={ScheduleOrder} />
-            <Route exact path="/washes" component={ViewWashes} />
+            <GuardedRoute exact path="/washes" component={ViewWashes} />
             <Route exact path="/washes/:id" component={ViewWash} />
 
           </Switch>

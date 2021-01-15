@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function CardSched(props){
     return (
@@ -8,15 +7,8 @@ function CardSched(props){
                 <img className="card-img-top" src={props.src} alt={props.alt}/>
                 <div className="card-body">
                     <p className="card-title">{props.title}</p>
-                    <Link 
-                    to={{
-                        pathname: "/schedule/car",
-                        state: {
-                            car: props.title
-                        }
-                    }}
-                    className="btn btn-primary"
-                    >{props.title}</Link>
+                
+                    <button className="btn btn-primary" onClick={props.function}>{props.title}</button>
                 </div>
             </div>
         </div>

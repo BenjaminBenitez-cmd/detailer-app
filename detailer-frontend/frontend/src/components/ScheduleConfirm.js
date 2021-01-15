@@ -1,42 +1,37 @@
 import React, { useState } from 'react';
 import ScheduleSteps from '../ui-components/ScheduleSteps';
 import { Link } from 'react-router-dom';
+import { postUserWash } from '../services/user.service';
 
 
 function ScheduleOrder(props){    
-    const { car, typeOfWash, latitude, longitude } = props.location.state;
+    const information = props.location.state;
     const [value, setValue] = useState(0);
     const [message, setMessage] = useState("");
-    const [successfull, SetSuccessful] = useState(false);
-
-   const fakeApi = (number, message) => {
-       return new Promise((resolve, reject) => {
-           if(!message){
-               reject(new Error("Opps something went wrong"));
-           }
-           setTimeout(() => {
-             resolve(message);
-           }, number);
-       });
-   };
-
+    const [successful, SetSuccessful] = useState(false);
+   
    
     async function openModal() {
         document.getElementById("staticBackdrop").style.display = "block";
         document.getElementById("staticBackdrop").className += "show";
         try {
-            let response = await fakeApi(500, "Finding nearest detailer");
-            setMessage(response);
-            setValue(30); 
-            response = await fakeApi(1000, "Scheduled successfully");
-            setMessage(response);
-            setValue(100);
-            SetSuccessful(true);
+            // let response = await fakeApi(500, "Finding nearest detailer");
+            // setMessage(response);
+            // setValue(30); 
+            // response = await fakeApi(1000, "Scheduled successfully");
+            // setMessage(response);
+            // setValue(100);
+            // SetSuccessful(true);
+            
+            postUserWash(information)
+            .then(response => {
+                console.log(response);
+            })
         } catch(err) {
             setMessage(err);
         }
     };
-
+  
     function closeModal() {
         // document.getElementById("backdrop").style.display = "none"
         setValue(0);
@@ -53,15 +48,18 @@ function ScheduleOrder(props){
             closeModal()
         };
     };
+    
+    
   
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
-                    <p><strong>Car </strong> {car}</p>
-                    <p><strong>Type of wash </strong>{typeOfWash}</p>
-                    <p><strong>Latitude </strong>{latitude}</p>
-                    <p><strong>longitude </strong>{longitude}</p>
+                    <p><strong>Car </strong>{information.name}</p>
+                    <p><strong>Brand </strong>{information.carType}</p>
+                    <p><strong>Due </strong>{information.due}</p>
+                    <p><strong>Latitude </strong>{information.latitude}</p>
+                    <p><strong>longitude </strong>{information.longitude}</p>
                 </div>
                 <div className="col-md-12 d-flex justify-content-center align-items-vertical">
                     <button type="button" className="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => openModal()}>
@@ -82,7 +80,7 @@ function ScheduleOrder(props){
                         </div>
                         <div className="modal-footer">
                             {            
-                                successfull ? 
+                                successful ? 
                                 <Link className="btn btn-primary" to="/dashboard" data-bs-dismiss="modal">Proceed</Link>
                                 :(
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => closeModal()}>Cancel</button>

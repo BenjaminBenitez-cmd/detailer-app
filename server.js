@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express');
 const db = require('./utils/config');
 const userRouter = require('./models/user/user-router')
-const listRouter = require('./models/list/list-router')
 const washesRouter = require('./models/washes/washes-router')
 const Port = process.env.PORT
 const bodyParser = require('body-parser')
@@ -21,7 +20,6 @@ app.post('/signup', auth.signup);
 
 app.use('/api', auth.protect);
 app.use('/api/user', userRouter);
-app.use('/api/list', listRouter);
 app.use('/api/washes', washesRouter);
 
 const start = async () => {

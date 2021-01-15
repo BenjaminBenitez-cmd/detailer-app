@@ -8,8 +8,8 @@ mapboxgl.accessToken = mapboxBoxToken;
 
 
 function ScheduleStepThree(props){
-    const {car, typeOfWash } = props.location.state;
-    const mapContainerRef = useRef(null);
+    const information = props.location.state;
+    const mapContainerRef = useRef("");
     const [longitude, setLongitude] = useState("");
     const [latitude, setLatitude] = useState("");
 
@@ -18,7 +18,7 @@ function ScheduleStepThree(props){
             navigator.geolocation.getCurrentPosition(position => {
                 setLongitude(position.coords.longitude);
                 setLatitude(position.coords.latitude);                
-                const map = new mapboxgl.Map({
+                let map = new mapboxgl.Map({
                     container: mapContainerRef.current,
                     // See style options here: https://docs.mapbox.com/api/maps/#styles
                     style: 'mapbox://styles/mapbox/streets-v11',
@@ -53,12 +53,12 @@ function ScheduleStepThree(props){
         }  else {
 
         }
-    }, [])
+    }, [latitude, longitude])
     
 
     return (
     <>
-    <div className="mapContainer" ref={mapContainerRef}>
+    <div className="mapContainer" ref={(el) => (mapContainerRef.current = el)}>
         <div className="markerbox"></div>
     </div> 
     <div className="card fixed-bottom" style={{width: "30rem", margin: "0 auto"}}>
@@ -73,8 +73,7 @@ function ScheduleStepThree(props){
               to={{
                   pathname: "/schedule/order",
                   state:{
-                      car: car,
-                      typeOfWash: typeOfWash,
+                      ...information,
                       longitude: longitude,
                       latitude: latitude
                   }

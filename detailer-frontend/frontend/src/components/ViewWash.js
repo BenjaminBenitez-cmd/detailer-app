@@ -49,7 +49,7 @@ function ViewWash(){
                 <strong>Time: </strong>{content.due}
             </p>
             <p>
-                <strong>Wash Type: </strong>{content.washType}
+                <strong>Type: </strong>{content.carType}
             </p>
             <p>
                 <strong>Payment: </strong>{isPaid(content.paid)}

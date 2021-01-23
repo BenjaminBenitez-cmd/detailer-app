@@ -5,23 +5,25 @@ import './App.css';
 
 import  { getCurrentUser, logout } from './services/auth.service';
 
-import Signin from './components/Signin';
-import Register from './components/Register';
+import Signin from './components/auth/Signin';
+import Register from './components/auth/Register';
 import Home from './components/Home';
-import Profile from './components/Profile';
+import Profile from './components/profile/Profile';
 import DetailerUser from './components/DetailerUser';
-import Schedule from './components/Schedule';
-import ScheduleTwo from './components/ScheduleStep-2';
-import GuardedRoute from './components/GuardedRoute';
-import ScheduleThree from './components/ScheduleStep-3';
-import ScheduleOrder from './components/ScheduleConfirm';
-import ViewWashes from './components/ViewWashes';
-import ViewWash from './components/ViewWash';
+import GuardedRoute from './navigation/GuardedRoute';
+import Schedule from './components/schedule/Schedule';
+import { ViewWash, ViewWashes } from './components/washes';
+
 
 function App(){
 
   const [currentUser, setCurrentUser] = useState(undefined);
-  
+  const [notification, setNotification] = useState(null);
+
+  const updateNotification = (num) =>{
+    setNotification(num);
+  }
+
   useEffect(() => {
     const user = getCurrentUser();
     if(user){
@@ -63,9 +65,6 @@ function App(){
               </Link>
             </li>
             <li className="nav-item">
-              {/* <a href="/" className="nav-link" onClick={logOut}>
-                Logout
-              </a> */}
               <Link to="/" className="nav-link" onClick={logOut}>
                 Logout
               </Link>
@@ -92,16 +91,17 @@ function App(){
             <Route exact path={["/", "/home"]} component={Home}/>
             <Route exact path="/signin" component={Signin}/>
             <Route exact path="/register" component={Register}/>
-            <Route exact path="/profile" component={Profile}/>
-            {/* <Route exact path="/dashboard" component={DetailerUser}/> */}
-            <GuardedRoute path='/dashboard' component={DetailerUser} />
-            <Route exact path="/schedule" component={Schedule} />
-            <Route exact path="/schedule/car" component={ScheduleTwo} />
-            <Route exact path="/schedule/location" component={ScheduleThree} />
-            <Route exact path="/schedule/order" component={ScheduleOrder} />
-            <GuardedRoute exact path="/washes" component={ViewWashes} />
-            <Route exact path="/washes/:id" component={ViewWash} />
-
+            <GuardedRoute exact path="/profile" component={Profile}/>
+            <GuardedRoute path='/dashboard'>
+              <DetailerUser notification={notification}/>
+            </GuardedRoute>
+            <GuardedRoute exact path="/schedule"> 
+              <Schedule updateNotification={updateNotification}/>
+            </GuardedRoute>
+            <GuardedRoute exact path="/washes">
+              <ViewWashes updateNotification={updateNotification}/>
+            </GuardedRoute>
+            <GuardedRoute exact path="/washes/:id" component={ViewWash} />
           </Switch>
       </div>
     </div>

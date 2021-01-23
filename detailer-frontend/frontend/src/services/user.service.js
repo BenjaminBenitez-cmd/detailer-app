@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import { apiPath } from '../config'
+import { apiPath, mapboxBoxToken } from '../config';
 
 const API_URL = apiPath + "/api";
+
 
 export const getUserLists = () => {
     return axios.get(API_URL + "/list", { headers: authHeader() });
@@ -17,8 +18,7 @@ export const getUserWash = (id) => {
 }
 
 export const postUserWash = (info) => {
-    return axios.post(API_URL + `/washes`, {
-        ...info,
+    return axios.post(API_URL + `/washes`, info, {
         headers:authHeader()
     })
 }
@@ -35,7 +35,8 @@ export const isSuccessful = (position) => {
     return position.coords;
 }
 
-export const getUserLocation = (callback) => {
-    return navigator.geolocation.getCurrentPosition((position) => callback(position));
+export const getUserLocation = async (lng, lat) => {
+    const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + lng + "," + lat + ".json?access_token=" + mapboxBoxToken;
+    return axios.get(url);
 }
 

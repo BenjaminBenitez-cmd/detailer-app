@@ -9,7 +9,9 @@ function Card(props){
                 <div className="card-body">
                     <h5 className="card-title">{props.title}</h5>
                     <p className="card-text">{props.paragraph}</p>
-                    <NavLink to={`/${props.link}`} className="btn btn-primary">{props.link}</NavLink>
+                    <NavLink to={`/${props.link}`} className="btn btn-primary">
+                        {props.link} <span className="badge badge-light">{props.notification}</span>
+                    </NavLink>
                 </div>
             </div>
         </div>

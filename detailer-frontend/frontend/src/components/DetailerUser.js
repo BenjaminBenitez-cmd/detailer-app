@@ -1,22 +1,9 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import authService from '../services/auth.service';
+
 import Card from '../ui-components/Card';
 
-function DetailerUser(){
-<<<<<<< HEAD
-    // const [content, setContent] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    // const [successful, setSuccessful] = useState("");
-    const history = useHistory();
 
-    const user = authService.getCurrentUser();
-    if(!user) {
-        history.push("/signin");
-    }
-
-=======
->>>>>>> api-fix
+function DetailerUser({ notification }){
     return (
         <div className="container">
             <div className="row">
@@ -34,6 +21,7 @@ function DetailerUser(){
                         title={"View washes"}
                         paragraph={"Make payment and view progress"}
                         link={"washes"}
+                        notification={notification}
                     />
                 </div>
                 <div className="col-md-4">

@@ -11,7 +11,6 @@ const washSchema = new mongoose.Schema(
         carType: {
             type: String,
             required: true, 
-            enum: ['coop', 'truck', 'SUV', 'sportsCar']
         },
         status: {
             type: String,
@@ -50,6 +49,6 @@ const washSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-washSchema.index({ user: 1, name: 1 }, {unique: true })
+// washSchema.index({ user: 1, name: 1 }, {unique: true })
 
 module.exports = mongoose.model('wash', washSchema)

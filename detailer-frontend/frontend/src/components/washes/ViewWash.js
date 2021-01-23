@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import ScheduleSteps from '../ui-components/ScheduleSteps';
-import { getUserWash } from '../services/user.service';
+import ScheduleSteps from '../../ui-components/ScheduleSteps';
+import { getUserLocation, getUserWash } from '../../services/user.service';
 
 function ViewWash(){
     const { id } = useParams();
     const [content, setContent ] = useState({});
+    const [location, setLocation] = useState('');
     
     const progressConverter = (condition) => {
         switch (condition) {
@@ -36,7 +37,11 @@ function ViewWash(){
         .then((response) => {
             setContent(response.data.data);
         })
-    }, [id]);
+        getUserLocation(content.longitude, content.latitude).then( (response) => {
+            setLocation(response.data.features[0].place_name);
+        })
+        
+    }, [id, content]);
     
     return (
         <div className="container">
@@ -55,7 +60,7 @@ function ViewWash(){
                 <strong>Payment: </strong>{isPaid(content.paid)}
             </p>
             <p>
-                <strong>Location: </strong> Placeholder location
+                <strong>Location: </strong> {location}
             </p>
             <Link to="/washes" className="btn btn-primary">Go back</Link>
         </div>

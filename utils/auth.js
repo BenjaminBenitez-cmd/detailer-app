@@ -26,9 +26,8 @@ module.exports.signup = async (req, res) => {
     }
     
     try {
-        const user = await User.create(req.body)
-        const token = newToken(user)
-        return res.status(201).send({ token })
+        await User.create(req.body)
+        return res.status(201).send({ message: "Successfully registered" })
     } catch (e) {
         return res.status(500).end()
     }

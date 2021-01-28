@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Card from '../ui-components/Card';
+import Card from '../../components/ui-components/Card';
+import'./style.css';
 
 
 function DetailerUser({ notification }){

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import ScheduleSteps from '../../ui-components/ScheduleSteps';
+import ScheduleSteps from '../../components/ui-components/ScheduleSteps';
 import { getUserLocation, getUserWash } from '../../services/user.service';
 
 function ViewWash(){

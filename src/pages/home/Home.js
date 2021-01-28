@@ -1,15 +1,14 @@
 import React from 'react';  
 import { Link } from 'react-router-dom';
-import threeMockups from '../assets/img/three-mockups-lg.png';
-import twoMockups from '../assets/img/two-mockups-lg.png';
-import model from '../assets/img/model-lg.png';
+import threeMockups from '../../assets/img/three-mockups-lg.png';
+import twoMockups from '../../assets/img/two-mockups-lg.png';
+import model from '../../assets/img/model-lg.png';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import HighQualityIcon from '@material-ui/icons/HighQuality';
 import PhonelinkRingIcon from '@material-ui/icons/PhonelinkRing';
+import './home.css';
 
 function Home(){
-    const body = document.querySelector('body');
-    body.style.backgroundImage = 'none';
     return (
         <>
         <main>

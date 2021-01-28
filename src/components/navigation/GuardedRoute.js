@@ -14,7 +14,6 @@ function GuardedRoute({
                 : <Redirect to='/signin' />
         )}/>
     )
-   
 }
 
 export default GuardedRoute;

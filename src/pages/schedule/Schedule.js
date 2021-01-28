@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { postUserWash } from '../../services/user.service';
-import ScheduleSteps from '../../ui-components/ScheduleSteps';
+import ScheduleSteps from '../../components/ui-components/ScheduleSteps';
 import { ChooseBrand, ChooseCar, ChooseSchedule, ChooseLocation, Confirm } from './steps';
 
 const array = [

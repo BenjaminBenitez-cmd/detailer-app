@@ -7,12 +7,12 @@ import  { getCurrentUser, logout } from './services/auth.service';
 
 
 import { Authenticate, Signin, Register, ResetRequest, ResetPassword} from './components/auth';
-import Home from './components/Home';
-import Profile from './components/profile/Profile';
-import DetailerUser from './components/DetailerUser';
-import GuardedRoute from './navigation/GuardedRoute';
-import Schedule from './components/schedule/Schedule';
-import { ViewWash, ViewWashes } from './components/washes';
+import Home from './pages/home/Home';
+import Profile from './pages/profile/Profile';
+import DetailerUser from './pages/dashboard/DetailerUser';
+import GuardedRoute from './components/navigation/GuardedRoute';
+import Schedule from './pages/schedule/Schedule';
+import { ViewWash, ViewWashes } from './pages/washes';
 
 import logo from './assets/img/logo.png'
 
@@ -27,6 +27,16 @@ function App(){
     },
     [],
   );
+
+  const changeColor = (color) => {
+    const body = document.querySelector('body');
+    if(color === 'white'){
+      body.style.backgroundImage = 'none';
+      body.style.backgroundColor = '#ffffff';
+    } else if(color === 'brown'){
+      body.style.backgroundImage = 'linear-gradient( #0d0303 , #542020)';
+    }
+  }
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -47,12 +57,17 @@ function App(){
             <div className="container">
               <div className="row">
                 <div id="left_nav" className="col-xs-12 col-sm-6 mt-2">
-                  <Link to='/'><img src={logo} alt="Detailer logo"/></Link>
-                </div>
+                  <Link to='/' onClick={() => changeColor('brown')}><img src={logo} alt="Detailer logo"/></Link>
+                </div>  
                 <div id="right_nav" className="col-xs-12 col-sm-6 mt-2">
                   <ul>
                     {currentUser ? (
                       <>
+                        <li>
+                          <Link to={"/dashboard"} onClick={() => changeColor('white')}>
+                            Dashboard
+                          </Link>
+                        </li>
                         <li>
                           <Link to={"/profile"}>
                             {currentUser.user.email}

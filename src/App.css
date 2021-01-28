@@ -86,11 +86,6 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-/* Document colors */
-.main_color {
-  background: linear-gradient(#0d0303, #542020);
-}
-
 :root {
   --main-body-color: #0d0303;
   --secondary-body-color: #542020;
@@ -112,10 +107,6 @@ body {
 
 .add_margin {
   margin: 0 1.5rem;
-}
-
-.white_space {
-  height: 100px;
 }
 
 header > nav {

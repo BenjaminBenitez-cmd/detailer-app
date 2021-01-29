@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
@@ -14,12 +14,13 @@ import GuardedRoute from './components/navigation/GuardedRoute';
 import Schedule from './pages/schedule/Schedule';
 import { ViewWash, ViewWashes } from './pages/washes';
 
-import logo from './assets/img/logo.png'
+import Navbar from './components/ui-components/navbar/Navbar';
 
 
 function App(){
   const [currentUser, setCurrentUser] = useState(undefined);
   const [notification, setNotification] = useState(null);
+  const [navColor, setNavColor] = useState(true);
 
   const updateNotification = useCallback(
     (num) => {
@@ -27,16 +28,15 @@ function App(){
     },
     [],
   );
-
-  const changeColor = (color) => {
-    const body = document.querySelector('body');
-    if(color === 'white'){
-      body.style.backgroundImage = 'none';
-      body.style.backgroundColor = '#ffffff';
-    } else if(color === 'brown'){
-      body.style.backgroundImage = 'linear-gradient( #0d0303 , #542020)';
-    }
-  }
+  // const navbarColor = () => {
+  //   const path = window.location.pathname;
+  //   if(path !== '/' || path !== '/home'){
+  //       setNavColor('dark')
+  //   } else {
+  //     setNavColor('light');
+  //   }
+  // }
+  const setColor = (color) => color ? setNavColor(true) : setNavColor(false);
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -49,58 +49,11 @@ function App(){
     logout();
     window.location.reload();
   };
+  // console.log(navbarColor());
 
   return (
-    <div>
-        <header>
-          <nav className="add_margin">
-            <div className="container">
-              <div className="row">
-                <div id="left_nav" className="col-xs-12 col-sm-6 mt-2">
-                  <Link to='/' onClick={() => changeColor('brown')}><img src={logo} alt="Detailer logo"/></Link>
-                </div>  
-                <div id="right_nav" className="col-xs-12 col-sm-6 mt-2">
-                  <ul>
-                    {currentUser ? (
-                      <>
-                        <li>
-                          <Link to={"/dashboard"} onClick={() => changeColor('white')}>
-                            Dashboard
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/profile"}>
-                            {currentUser.user.email}
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/" onClick={logOut}>
-                            Logout
-                          </Link>
-                        </li>
-                      </>
-                    ):(
-                      <>
-                        <li>
-                          <Link to={"/signin"}>
-                            Sign In
-                          </Link>
-                        </li>
-
-                        <li className="nav-item">
-                          <Link to={"/register"}>
-                            Register
-                          </Link>
-                        </li>
-                      </>
-                    )}
-                </ul>
-                </div>
-              </div>
-            </div>
-          </nav>
-      </header>
-      
+    <>
+      <Navbar logout={logOut} currentUser={currentUser} navColor={navColor}/>
       <div className="inner-body">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home}/>
@@ -122,7 +75,7 @@ function App(){
             <GuardedRoute exact path="/washes/:id" component={ViewWash} />
           </Switch>
       </div>
-    </div>
+    </>
   )
 }
 

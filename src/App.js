@@ -20,23 +20,24 @@ import Navbar from './components/ui-components/navbar/Navbar';
 function App(){
   const [currentUser, setCurrentUser] = useState(undefined);
   const [notification, setNotification] = useState(null);
-  const [navColor, setNavColor] = useState(true);
+  const [navColor, setNavColor] = useState(false);
 
+  //Manges the dashboard notifications
   const updateNotification = useCallback(
     (num) => {
       setNotification(num);
     },
     [],
   );
-  // const navbarColor = () => {
-  //   const path = window.location.pathname;
-  //   if(path !== '/' || path !== '/home'){
-  //       setNavColor('dark')
-  //   } else {
-  //     setNavColor('light');
-  //   }
-  // }
-  const setColor = (color) => color ? setNavColor(true) : setNavColor(false);
+  //updates the navbar color
+  const updateNav = (color) => color ? setNavColor(true) : setNavColor(false);
+
+  
+  //logs out user
+  const logOut = () => {
+    logout();
+    window.location.reload();
+  };
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -45,18 +46,14 @@ function App(){
     }
   }, []);
 
-  const logOut = () => {
-    logout();
-    window.location.reload();
-  };
-  // console.log(navbarColor());
-
   return (
     <>
       <Navbar logout={logOut} currentUser={currentUser} navColor={navColor}/>
       <div className="inner-body">
           <Switch>
-            <Route exact path={["/", "/home"]} component={Home}/>
+            <Route exact path={["/", "/home"]}>
+              <Home updateNav={updateNav}/>
+            </Route>
             <Route exact path="/signin" component={Signin}/>
             <Route exact path="/register" component={Register}/>
             <Route exact path="/resetrequest" component={ResetRequest} />

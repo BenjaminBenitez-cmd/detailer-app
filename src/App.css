@@ -103,16 +103,6 @@ body {
   font-size: var(--font-size);
 }
 
-.body {
-  background-image: linear-gradient(
-    var(--main-body-color),
-    var(--secondary-body-color)
-  );
-  font-family: var(--font);
-  color: var(--main-text-color);
-  font-size: var(--font-size);
-}
-
 .add_margin {
   margin: 0 1.5rem;
 }

@@ -6,40 +6,38 @@ export const checkIfEmpty = (value) => {
     }
 };
 
-export const checkForBoth = ( username, email, password) => {
-    let errors =[];
-    if(!/\S+@\S*\.\S+/.test(email)){
-        errors.push("email");
-    } else if (!checkIfEmpty(email)){
-        errors.push("Empty mail");
-    }   
-    if(!/\S{8,}/.test(password)){
-        errors.push("password");
-    } else if (!checkIfEmpty(password)){
-        errors.push("Password is empty");
+export const checkForBoth = ( username, email) => {
+    
+}
+
+export const checkForUsername = (fieldValue) => {
+    if(/[^a-zA-Z -]/.test(fieldValue)) {
+        return "Invalid Characters";
     }
-    if(!/\S{8}/.test(username)){
-        errors.push("username");
-    } else if (!checkIfEmpty(username)){
-        errors.push("Username is empty");
+    if(fieldValue.trim() === '') {
+        return "Invalid characters";
     }
-    return errors
+    if(fieldValue.trim().length < 8){
+        return "Username needs to be at least three characters";
+    }
+    return null;
 }
 
 export const CheckForEmail = (email) => {
     if(!/\S+@\S*\.\S+/.test(email)){
-        return false;
+        return "Invalid email";
     } else if (checkIfEmpty(email)){
-        return false;
+        return "Email is required";
     }
-    return true;   
+    return null;   
 }
 
 export const checkForPassword = (password) => {
     if(!/\S{8,}/.test(password)){
         return "Password should be atleast 8 characters";
-    } else if (checkIfEmpty(password)){
-        return "Password should not be empty";
     } 
-    return "valid";
+    if (checkIfEmpty(password)){
+        return "Password is required";
+    } 
+    return null;
 }

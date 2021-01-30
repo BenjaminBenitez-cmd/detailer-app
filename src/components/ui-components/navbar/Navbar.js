@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/img/logo.png';
+import { ReactComponent as Logo } from '../../../assets/img/logo.svg';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from './Navbar.module.css';
 
 function Navbar({ currentUser, logout, navColor }) {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(navColor);
 
     const handleClick = () => {
        setIsOpen(!isOpen);
     }
+    const darkmode = {
+      backgroundColor: '#0d0303',
+      color: 'white'
+    }
+    const lightmode = {
+      backgroundColor: 'white',
+      color: '#000000',
+    }
 
     return (
-      <header>
-        <nav className={`add_margin ${navColor && styles.darkMode}`}>
-          <Link to='/'><img src={logo} alt="Detailer logo" /></Link>
-          <ul className={styles.menu}>
+      <header style={navColor ? darkmode : lightmode }>
+        <nav className="add_margin">
+          <Link to='/'><Logo fill={navColor ? darkmode.color : lightmode.color }/></Link>
+          <ul className={styles.menu}>  
             {currentUser ? (
               <>
                 <li>

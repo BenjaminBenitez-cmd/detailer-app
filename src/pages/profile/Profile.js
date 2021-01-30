@@ -16,14 +16,14 @@ const Profile = () => {
                     <strong>{content.email}</strong>
                 </h3>
             </header>
-            <ul class="list-group">
-                <li class="list-group-item">
+            <ul className="list-group">
+                <li className="list-group-item">
                     <p className="h6">ID <span className="text-muted">{content.id}</span></p>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                     <p className="h6">Email <span className="text-muted">{content.email}</span></p>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                     <p className="h6">Location <span className="text-muted"> San Lazaro Village, Orange Walk Belize</span></p>
                 </li>
             </ul> 

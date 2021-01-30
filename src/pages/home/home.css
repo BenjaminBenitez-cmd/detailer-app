@@ -1,12 +1,10 @@
-:root {
-  --main-body-color: #0d0303;
-  --secondary-body-color: #542020;
-  --main-text-color: #ffffff;
-  --secondary-text-color: #000000;
-  --font: "Montserrat", sans-serif;
-  --font-size: 16px;
+.body {
+  background-image: linear-gradient(
+    var(--main-body-color),
+    var(--secondary-body-color)
+  );
+  color: var(--main-text-color);
 }
-
 .hero {
   padding: 4rem 0;
 }

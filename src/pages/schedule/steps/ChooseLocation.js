@@ -28,7 +28,8 @@ function ChooseLocation({ updateLocation }){
      useEffect(() => {
         if ("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(position => {
-                const { latitude, longitude } = position.coords;              
+                const { latitude, longitude } = position.coords; 
+                console.log(latitude, longitude);             
                 let map = new mapboxgl.Map({
                     container: mapContainerRef.current,
                     // See style options here: https://docs.mapbox.com/api/maps/#styles

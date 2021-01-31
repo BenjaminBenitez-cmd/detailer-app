@@ -61,10 +61,12 @@ function ViewWashes({ updateNotification }){
                                 content.map((element) => (
                                     <CardWash 
                                         key={element._id}
-                                        id={element._id} 
+                                        id={element._id}
+                                        name={element.name} 
                                         list={element.list} 
-                                        carType={element.name} 
+                                        carType={element.carType} 
                                         time={element.due}
+                                        work={element.work}
                                     />
                                 ))
                             }

@@ -95,9 +95,6 @@ footer p {
 }
 
 @media only screen and (min-width: 600px) {
-  .add_margin {
-    margin: 0 6rem;
-  }
   .hero {
     padding-top: 2rem;
   }

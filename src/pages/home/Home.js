@@ -6,7 +6,7 @@ import model from '../../assets/img/model-lg.png';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import HighQualityIcon from '@material-ui/icons/HighQuality';
 import PhonelinkRingIcon from '@material-ui/icons/PhonelinkRing';
-import './home.css';
+import styles from './home.module.css';
 
 function Home({ updateNav }){
     useEffect(() => {
@@ -16,13 +16,13 @@ function Home({ updateNav }){
         }
     }, [updateNav]);
     return (
-        <div className="body">
+        <div className={styles.body}>
             <main>
-            <article className="hero add_margin">
+            <article className={`${styles.hero} add_margin`}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xs-12 col-sm-6">
-                            <img src={threeMockups} className="img-fluid hero_image pt-5 pb-5" alt="Images showing mockups of the app"/>
+                            <img src={threeMockups} className={`img-fluid ${styles.hero_image} pt-5 pb-5`} alt="Images showing mockups of the app"/>
                         </div>  
                         <div className="col-xs-12 col-sm-6 d-flex align-items-center justify-content-center">
                             <h1>Detailing Made Easy and Fast</h1>
@@ -30,11 +30,11 @@ function Home({ updateNav }){
                     </div>
                 </div>
             </article>
-            <article className="section_one add_margin">
+            <article className={`${styles.section_one} add_margin`}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12 col-md-4 mb-5">
-                            <div className="card">
+                            <div className={`card ${styles.card}`}>
                                 <ul>
                                     <li><FastForwardIcon/></li>
                                     <li><p>Fast Action</p></li>
@@ -43,7 +43,7 @@ function Home({ updateNav }){
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-4 mb-5">
-                            <div className="card">
+                            <div className={`card ${styles.card}`}>
                                 <ul>
                                     <li><HighQualityIcon/></li>
                                     <li><p>Quality Not Quantity</p></li>
@@ -52,7 +52,7 @@ function Home({ updateNav }){
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-4 mb-5">
-                            <div className="card">
+                            <div className={`card ${styles.card}`}>
                                 <ul>
                                     <li><PhonelinkRingIcon/></li>
                                     <li><p>At your service</p></li>
@@ -63,8 +63,8 @@ function Home({ updateNav }){
                     </div>
                 </div>
             </article>
-            <article className="section_two">
-                <div className="container-fluid shape">
+            <article className={styles.section_two}>
+                <div className={`container-fluid ${styles.shape}`}>
                     <div className="container-fluid mx-0">
                         <div className="row add_margin">
                             <div className="col-sm-6 col-md-6">
@@ -78,13 +78,13 @@ function Home({ updateNav }){
                     </div>
                 </div>
             </article>    
-            <article className="section_three add_margin">
+            <article className={`${styles.section_three} add_margin`}>
                 <div className="container_fluid">
                     <div className="row">
                         <div className="col-xs-12 col-sm-6 col-md-6">
                             <img className="img-fluid" src={twoMockups} alt="Smart phones with representation of app"/>
                         </div>          
-                        <div className="col-xs-12 col-sm-6 col-md-6 section_three_p">
+                        <div className={`col-xs-12 col-sm-6 col-md-6 ${styles.section_three_p}`}>
                             <h3>Payments and Tracking Made as Easy as One, Two, Three.</h3>
                         </div>          
                     </div>

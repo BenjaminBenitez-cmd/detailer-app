@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { checkForBoth } from '../../services/auth.validators';
+import { validateThree } from '../../services/auth.validators';
 
 import { register }  from '../../services/auth.service';
 
@@ -40,37 +40,44 @@ function Register(){
         setMessage("");
         setSuccessful(false);
 
-        const isValid = checkForBoth(username, email, password);
+        const obj = {
+            email: email,
+            username: username,
+            password: password
+        }
 
-        if(isValid.length === 0){
-            register(username, email, password)
-            .then(
-                (response) => {
-                    setMessage(response.data.message);
-                    setSuccessful(true);
-                    setLoading(false);
-                }, 
-                (error) => {
-                    const resMessage = 
-                      (error.response && 
-                        error.response.data && 
-                        error.response.data.message) ||
-                        error.response.data ||
-                        error.toString();
+        const isValid = validateThree(obj);
+        if(isValid.length > 0){
+            setLoading(false);
+            setMessage(isValid[0]);
+            return;
+        }
 
-                    setMessage(resMessage);
-                    setSuccessful(false);
-                    setLoading(false);
-                }
-            ).catch((err) => {
-                setMessage("Opps, it appears we have a network error");
+        
+        register(username, email, password)
+        .then(
+            (response) => {
+                setMessage(response.data.message);
+                setSuccessful(true);
+                setLoading(false);
+            }, 
+            (error) => {
+                const resMessage = 
+                    (error.response && 
+                    error.response.data && 
+                    error.response.data.message) ||
+                    error.response.data ||
+                    error.toString();
+
+                setMessage(resMessage);
                 setSuccessful(false);
                 setLoading(false);
-            })
-        } else {
-            const message = 'Invalid ' + isValid.join(', ')
-            setMessage(message);
-        }
+            }
+        ).catch((err) => {
+            setMessage("Opps, it appears we have a network error");
+            setSuccessful(false);
+            setLoading(false);
+        })
     };
     return (
         <>
@@ -81,7 +88,7 @@ function Register(){
                 <div style={{height: '100px'}}></div>
                 <div className="row align-items-center">
                     <div className="col-md-6">
-                        <p className="display-4">Sign in to detail your car with one click</p>
+                        <p className="h3 p-3"><span className="display-4">Register</span> to start detailing your car with one click.</p>
                     </div>
                     <div className="col-md-6 d-flex align-content-center">
                         <div className="card card-container p-3 mt-lg-5" style={{ width: '30rem'}}>
@@ -118,11 +125,11 @@ function Register(){
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <button type="submit" className="btn btn-primary btn-block">
+                                        <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
                                             Sign up
-                                            {
-                                            loading && <span class="spinner-border spinner-border-sm ml-1" role="status" aria-hidden="true"></span>
-                                            }
+                                            {loading && (
+                                                <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"></span>
+                                            )}
                                         </button>
                                     </div>
                                 </div>            

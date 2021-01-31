@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { login }  from '../../services/auth.service';
+import { validateTwo } from "../../services/auth.validators";
 
 
 const Signin = (props) => {
@@ -23,7 +24,11 @@ const Signin = (props) => {
 
     setMessage("");
     setLoading(true);
-    const isValid = [];
+    const obj = {
+      email: email,
+      password: password
+    }
+    const isValid = validateTwo(obj);
     if (isValid.length === 0){
       login(email, password).then(
         () => {
@@ -44,7 +49,7 @@ const Signin = (props) => {
       )
     } else {
       setLoading(false);
-      setMessage(isValid.join());
+      setMessage(isValid[0]);
     }
 
   }
@@ -52,7 +57,7 @@ const Signin = (props) => {
     <div className="container">
       <div style={{height: '100px'}}></div>
       <div className="row align-items-center">
-        <div className="col-md-6 d-flex align-content-center">
+        <div className="col-md-6 order-md-6 order-2 d-flex align-content-center">
           <div className="card card-container p-3 mt-lg-5" style={{ width: '30rem'}}>
             <form onSubmit={ handleLogin }>
               <div className="form-group">
@@ -77,10 +82,10 @@ const Signin = (props) => {
               </div>
               <div className="form-group">
                 <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                  Login
                   {loading && (
-                    <span className="spinner-bordet spinner-border-sm"></span>
+                    <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"></span>
                   )}
-                  <span>Login</span>
                 </button>
               </div>
               {message && (
@@ -94,8 +99,8 @@ const Signin = (props) => {
             </form>
           </div> 
         </div>
-        <div className="col-md-6">
-          <div className="display-4"><small>Professionals at your </small> fingerprints</div>
+        <div className="col-md-6 order-md-6 order-1">
+          <p className="h3 p-3 text-center"><span className="display-4">Signin</span> and start scheduling!</p>
         </div>
       </div>
         

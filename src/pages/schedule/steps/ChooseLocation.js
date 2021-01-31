@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 mapboxgl.accessToken = mapboxBoxToken;
 
 
-function ChooseLocation({ updateLocation }){
+function ChooseLocation({ updateLocation, goBack }){
     const mapContainerRef = useRef("");
     const [viewPort, setViewport] = useState({});
     const [location, setLocation] = useState('');
@@ -77,7 +77,7 @@ function ChooseLocation({ updateLocation }){
                         {
                             viewPort && (<button className="btn btn-primary mr-3" onClick={() => updateLocation(viewPort)}>Confirm</button>)
                         }
-                    <button className="btn btn-primary">Cancel</button>
+                    <button className="btn btn-primary" onClick={goBack}>Cancel</button>
                     </div>
                 </div>
                 {

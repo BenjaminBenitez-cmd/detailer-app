@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { resetRequest } from '../../../services/auth.service';
-import { CheckForEmail } from '../../../services/auth.validators';
+import { checkForEmail } from '../../../services/auth.validators';
 
 
 
@@ -9,6 +9,7 @@ function ResetRequest() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -22,18 +23,20 @@ function ResetRequest() {
         e.preventDefault();
         setMessage("");
 
-        const isValid = CheckForEmail(email);
-        if(!isValid){
-            setMessage("Enter valid Email");
+        const isValid = checkForEmail(email);
+        if(isValid !== null){
+            setMessage(isValid);
             return;
         } 
+
+        setIsLoading(true);
+
         resetRequest(email)
         .then((response) => {
             if(response.status === 201){
                 setSuccess(true);
             } else if (response.status === 401) {
                 setMessage(response.message);
-                console.log(response)
             } else {
                 setMessage("Unable to process request");
             }
@@ -41,9 +44,9 @@ function ResetRequest() {
             setMessage("Unable to process request");
         })
         .catch((e) =>{
-            console.log(e);
             setMessage("Unable to send request");
         });
+        setIsLoading(false);
     }
     
 
@@ -66,7 +69,12 @@ function ResetRequest() {
                         value={email}
                         onChange={onChangeEmail}
                         />
-                        <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                        <button type="submit" className="btn btn-primary btn-block mt-3" disabled={isLoading}>
+                            Send
+                            {isLoading && (
+                                  <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"></span>
+                            )}
+                        </button>
                         {
                             message && (
                                 <div className="form-group mt-3">

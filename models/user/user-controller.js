@@ -7,7 +7,8 @@ const me = (req, res) => {
 const updateMe = async (req, res) => {
     try{
         const user = await User.findByIdAndUpdate(req.user._id, req.body, {
-            new: true
+            new: true,
+            useFindAndModify: true
         })
         .lean()
         .exec()

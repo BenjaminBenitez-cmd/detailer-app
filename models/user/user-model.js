@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+
 const userSchema = new mongoose.Schema(
     {
+        username: {
+            type: String, 
+            required: true,
+            unique: true,
+            trim: true
+        },
         email:{
             type: String,
             required: true,
@@ -14,18 +21,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-
-        settings: {
-            theme: {
-                type: String,
-                required: true,
-                default: 'dark'
-            },
-            notifications: {
-                type: Boolean,
-                required: true,
-                default: false
-            }
+        resetLink: {
+            data: String,
+            default: ''
         }
     },
     {timestamps: true }
@@ -45,6 +43,7 @@ userSchema.pre('save', function(next){
         next()
     })
 })
+
 
 userSchema.methods.checkPassword = function(password) {
     const passwordHash = this.password

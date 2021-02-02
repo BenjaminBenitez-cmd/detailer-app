@@ -6,6 +6,7 @@ const router = express.Router();
 router 
     .route('/')
     .post(controller.createUser)
+    .put(controller.updateMe)
 
 router	
     .route('/me')

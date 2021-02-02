@@ -17,6 +17,9 @@ app.use(morgan('dev'))
 
 app.post('/signin', auth.signin);
 app.post('/signup', auth.signup);
+app.post('/signinauth', auth.signupAuthentication);
+app.put('/reset', auth.forgotPassword);
+app.put('/changepassword', auth.resetPassword);
 
 app.use('/api', auth.protect);
 app.use('/api/user', userRouter);

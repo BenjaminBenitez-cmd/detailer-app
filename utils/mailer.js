@@ -32,7 +32,6 @@ return new Promise((resolve, reject) => {
             reject(error);
         } 
         resolve("sent");
-        console.log("Message sent: %s", info);
     })
   })
   

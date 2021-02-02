@@ -43,7 +43,6 @@ module.exports.signup = async (req, res) => {
         const response = await mail(obj);
         res.status(201).send({ message: response});
     } catch (e) {
-        console.log(e);
         return res.status(500).end()
     }
 }
@@ -64,7 +63,6 @@ module.exports.signupAuthentication = async (req, res) => {
         await User.create({email, username, password});
         return res.status(201).send({ message: "Successfully registered"});
     } catch(e) {
-        console.log(e);
         res.status(500).end()
     }
 }
@@ -79,7 +77,7 @@ module.exports.signin = async (req, res) => {
     
     try {
         const user = await User.findOne({ email: req.body.email })
-        .select('email password settings id')
+        .select('email password username id')
         .exec()
     
         if (!user) {
@@ -93,7 +91,7 @@ module.exports.signin = async (req, res) => {
         }
     
         const token = newToken(user)
-        return res.status(201).send({ token, user: { email: user.email, settings: user.settings, id: user._id } })
+        return res.status(201).send({ token, user: { email: user.email, username: user.username, id: user._id } })
     } catch (e) {
         console.error(e)
         res.status(500).end()
@@ -157,7 +155,6 @@ module.exports.forgotPassword = async (req, res) => {
    } catch (e) {
        return res.status(500).send({ message: "Unable to send email"});
    }
-   console.log(user);
    try{
         const userResetUpdate = await User
         .findOneAndUpdate(
@@ -170,14 +167,12 @@ module.exports.forgotPassword = async (req, res) => {
         )
         .lean()
         .exec()
-        console.log(userResetUpdate);
             
         if(!userResetUpdate){
             return res.status(401).send({ message: "could not find user"});
         }
         return res.status(201).send({ message: 'Email sent!'});
     } catch(e) {
-        console.log(e)
         res.status(500).end();
     }
 }
@@ -202,7 +197,6 @@ module.exports.resetPassword = async (req, res) => {
         .exec()
      
     if (user.resetLink !== token){
-         console.log(user);
          return res.status(401).end('Missing token or user');
      }
     let newPassSubmit = await User.findOne({ resetLink: token })

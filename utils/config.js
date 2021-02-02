@@ -1,16 +1,6 @@
-const mongoose = require('mongoose')
-const url = 'mongodb://127.0.0.1:27017/mongo-test'
-
-// mongoose.connect(url, { useNewUrlParser: true })
-
-// const db = mongoose.connection
-//     db.once('open', _ => {
-//         console.log('Database connected:', url)
-//     })
-
-//     db.on('error', err => {
-//         console.error('connection error:', err)
-//     })
+require('dotenv').config();
+const mongoose = require('mongoose');
+const url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.bagio.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 
 module.exports = {
     connect: () => {

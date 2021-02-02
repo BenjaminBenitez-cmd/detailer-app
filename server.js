@@ -14,7 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'))
-
+app.get('/', (req, res) => {
+    res.end('hello there');
+})
 app.post('/signin', auth.signin);
 app.post('/signup', auth.signup);
 app.post('/signinauth', auth.signupAuthentication);

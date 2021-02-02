@@ -15,6 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'))
 
+app.get('/', (req, res) => {
+    res.send('Detailer app');
+});
 app.post('/signin', auth.signin);
 app.post('/signup', auth.signup);
 app.post('/signinauth', auth.signupAuthentication);

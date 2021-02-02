@@ -11,15 +11,15 @@ function ViewWash(){
     
     const progressConverter = (condition) => {
         switch (condition) {
-            case "washing":
-                return 50;
-            case "on the way":
+            case "just started":
                 return 20;
-            case "drying car":
-                return 70;
-            case "applying wax":
-                return 80
-            case "completed":
+            case "washing":
+                return 40;
+            case "waxing car":
+                return 60;
+            case "drying":
+                return 80;
+            case "finished":
                 return 100;
         
             default:
@@ -51,31 +51,27 @@ function ViewWash(){
     }, [content])
     
     return (
-        <div className="container">
+        <div className="add_margin position-relative" style={{height: 'inherit'}}>
             {
                 error ? (
-                    <div>Unable to fetch details</div>
+                    <div className="center_space ">Unable to fetch details <Link to="/washes">return</Link></div>
                 ) : (
-                    <>
-                         <h1>{content.name}</h1>
-                        <ScheduleSteps valueNow={progressConverter(content.status)}/>
-                        <p>
-                            <strong>Car Type: </strong>{content.name}
-                        </p>
-                        <p>
-                            <strong>Time: </strong>{content.due}
-                        </p>
-                        <p>
-                            <strong>Type: </strong>{content.carType}
-                        </p>
-                        <p>
-                            <strong>Payment: </strong>{isPaid(content.paid)}
-                        </p>
-                        <p>
-                            <strong>Location: </strong> {location}
-                        </p>
-                        <Link to="/washes" className="btn btn-primary">Go back</Link>
-                    </>
+                    <div className="container-fluid ">
+                        <div className="row">
+                            <div className="col-12">
+                                <h1>{content.carType} {content.name}</h1>
+                                <ScheduleSteps valueNow={progressConverter(content.work)} progress={content.work}/>
+                                <p className="h6 font-weight-light py-2"><span className="font-weight-normal">Scheduled for:</span> {content.due}</p>
+                                <p className="h6 font-weight-light py-2"><span className="font-weight-normal">Location:</span> {location}</p>
+                                <p className="h6 font-weight-light py-2"><span className="font-weight-normal">Status:</span> {content.status}</p>
+                                <p className="h6 font-weight-light py-2"><span className="font-weight-normal">Paid:</span> {isPaid(content.paid)}</p>
+                            </div>
+                        </div>
+                        
+                        <div className="container-fluid py-3 d-flex justify-content-center">
+                            <Link className="btn btn-primary" to='/washes'>Return</Link>
+                        </div>
+                    </div>
                 )
             }
         </div>

@@ -1,3 +1,4 @@
+import { Container } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { getCurrentUser } from '../../services/auth.service';
 
@@ -10,12 +11,12 @@ const Profile = () => {
     }, []);
 
     return (
-        <div className="container">
-            <header className="jumbotron mt-3">
-                <h3>
-                    <strong>{content.email}</strong>
-                </h3>
-            </header>
+        <div className="add_margin">
+            <div className="jumbotron">
+            <div className="container">
+                <h1 className="display-4">Profile</h1>
+            </div>
+            </div>
             <ul className="list-group">
                 <li className="list-group-item">
                     <p className="h6">ID <span className="text-muted">{content.id}</span></p>

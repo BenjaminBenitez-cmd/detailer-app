@@ -50,6 +50,10 @@ header ul li a:hover {
   padding: 0;
 }
 
+.activeMenu li {
+  padding: 10px 0 10px 8px;
+}
+
 .inactiveMenu {
   display: none;
 }

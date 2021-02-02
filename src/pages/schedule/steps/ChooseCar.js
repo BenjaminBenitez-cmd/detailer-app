@@ -27,21 +27,21 @@ const cars = [
 
 function ChooseCar({ updateCar }) {
     return (
-       <div className="container">
-           <div className="row">           
-            {   
-                cars.map((car, index) => (
-                    <div className="col-sm-3" key={index}>
-                        <CardSched image={car.image} alt={car.alt} title={car.title} updateCar={updateCar}/>
-                    </div> 
-                ))
-            }
-          </div>
-          <br /> <br />
-          <div className="col-sm-12 d-flex justify-content-center">
-              <Link to='/dashboard' className="btn btn-primary">Return</Link>
-          </div>
-       </div>
+        <div className="container">
+            <div className="row">           
+                {   
+                    cars.map((car, index) => (
+                        <div className="col-sm-3 mb-3" key={index}>
+                            <CardSched image={car.image} alt={car.alt} title={car.title} updateCar={updateCar}/>
+                        </div> 
+                    ))
+                }
+            </div>
+            <br /> <br />
+            <div className="col-sm-12 d-flex justify-content-center">
+                <Link to='/dashboard' className="btn btn-primary">Return</Link>
+            </div>
+        </div>
     )
 }
 

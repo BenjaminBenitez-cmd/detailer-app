@@ -77,19 +77,18 @@ function Schedule({ updateNotification }){
           const message = await postUserWash(details);
           setMessage(message.statusText);
           updateNotification(1);
-          console.log(message);
         } catch (e) {
             setMessage("Opps, this is embarassing we could not schedule your request");
         }
     }
 
     const Response = () => message ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%', width: '100%'}}>
-            <p className="h5">{message}, return to <Link to="/dashboard">home</Link></p>
+        <div className="d-flex justify-content-center align-items-center center_space text-center">
+            <p className="h5 add_margin">{message}, return to <Link to="/dashboard">home</Link></p>
         </div>
 
     ) : (
-      <div className="d-flex justify-content-center align-items-center flex-column" style={{ height: '100%', width: '100%'}}>
+      <div className="d-flex justify-content-center align-items-center flex-column" style={{ height: '80vh', width: '100%'}}>
         <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden"></span>
         </div>

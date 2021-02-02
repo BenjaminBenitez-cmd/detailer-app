@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import  { getCurrentUser }  from '../../services/auth.service';
+import decode from 'jwt-decode';
 
-function GuardedRoute({
-    component: Component,
-    ...rest
-}){
+const checkAuth = () => {
     const user = getCurrentUser();
-    return (
-        <Route {...rest} render={(props) => (
-            user !== null
-                ? <Component {...props}/>
-                : <Redirect to='/signin' />
-        )}/>
-    )
+    if(!user){
+        return false;
+    }
+    try {
+        const { exp } = decode(user.token);
+        if (exp < new Date().getTime() / 1000){
+            return false;
+        }
+    } catch (e) {
+        return false;
+    }
+
+    return true;
 }
+const GuardedRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={ props => (
+    checkAuth() ? (
+      <Component {...props} {...rest}/>
+    ) : (
+      <Redirect
+        to={{
+          pathname: "/signin",
+          state: { from: props.location }
+        }}
+      />
+    )
+  )}/>
+)
 
 export default GuardedRoute;

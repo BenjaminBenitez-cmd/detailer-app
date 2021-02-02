@@ -28,7 +28,6 @@ function ResetPassword() {
         setIsLoading(true);
 
         const isValid = checkForPassword(confirmPass);
-        console.log(isValid);
         if(isValid !== 'valid'){
             setMessage(isValid);
             return;

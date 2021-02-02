@@ -22,8 +22,6 @@ function Confirm({ information, submitWash, minusStep }) {
             <button className="btn btn-primary mr-3" onClick={() => submitWash(information)}>Schedule</button>
             <button className="btn btn-secondary" onClick={minusStep}>Return</button>
           </div>
-           
-      
        </div>
     )
 }

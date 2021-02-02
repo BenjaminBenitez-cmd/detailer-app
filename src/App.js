@@ -49,7 +49,7 @@ function App(){
   return (
     <>
       <Navbar logout={logOut} currentUser={currentUser} navColor={navColor}/>
-      <div className="inner-body">
+      <div>
           <Switch>
             <Route exact path={["/", "/home"]}>
               <Home updateNav={updateNav}/>
@@ -60,16 +60,10 @@ function App(){
             <Route exact path="/resetpassword/:token" component={ResetPassword} />
             <Route exact path="/authenticate/:token" component={Authenticate}/>
             <GuardedRoute exact path="/profile" component={Profile}/>
-            <GuardedRoute path='/dashboard'>
-              <DetailerUser notification={notification}/>
-            </GuardedRoute>
-            <GuardedRoute exact path="/schedule"> 
-              <Schedule updateNotification={updateNotification}/>
-            </GuardedRoute>
-            <GuardedRoute exact path="/washes">
-              <ViewWashes updateNotification={updateNotification}/>
-            </GuardedRoute>
-            <GuardedRoute exact path="/washes/:id" component={ViewWash} />
+            <GuardedRoute path='/dashboard' notification={notification} component={DetailerUser}/>
+            <GuardedRoute exact path="/schedule" updateNotification={updateNotification} component={Schedule}/> 
+            <GuardedRoute exact path="/washes" updateNotification={updateNotification} component={ViewWashes} />
+            <GuardedRoute exact path="/washes/:id" component={ViewWash} />  
           </Switch>
       </div>
     </>

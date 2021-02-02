@@ -20,8 +20,8 @@ function ChooseLocation({ updateLocation, goBack }){
     }
 
     const ErrorScreen = () => (
-        <div className="position-absolute d-flex justify-content-center align-items-center" style={{top: 0, left: 0, backgroundColor: 'white', height: '100vh', width: '100%'}}>
-            <p className="h4">{error}, <Link to='/dashboard'>return to home</Link></p>
+        <div className="position-absolute d-flex justify-content-center align-items-center location_error">
+            <p>{error}, <Link to='/dashboard'>return to home</Link></p>
         </div>
     )
 
@@ -29,7 +29,6 @@ function ChooseLocation({ updateLocation, goBack }){
         if ("geolocation" in navigator){
             navigator.geolocation.getCurrentPosition(position => {
                 const { latitude, longitude } = position.coords; 
-                console.log(latitude, longitude);             
                 let map = new mapboxgl.Map({
                     container: mapContainerRef.current,
                     // See style options here: https://docs.mapbox.com/api/maps/#styles
@@ -65,7 +64,7 @@ function ChooseLocation({ updateLocation, goBack }){
         : (
             <>
                <div className="mapContainer" ref={(el) => (mapContainerRef.current = el)} /> 
-               <div className="card fixed-bottom" style={{width: "30rem", margin: "0 auto"}}>
+               <div className="card fixed-bottom px-2" style={{width: "30rem", margin: "0 auto"}}>
                     <div className="card-header">
                         Confirm Location
                     </div>  
@@ -77,7 +76,7 @@ function ChooseLocation({ updateLocation, goBack }){
                         {
                             viewPort && (<button className="btn btn-primary mr-3" onClick={() => updateLocation(viewPort)}>Confirm</button>)
                         }
-                    <button className="btn btn-primary" onClick={goBack}>Cancel</button>
+                        <button className="btn btn-primary" onClick={goBack}>Cancel</button>
                     </div>
                 </div>
                 {

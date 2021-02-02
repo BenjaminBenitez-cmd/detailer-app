@@ -6,7 +6,8 @@ import'./style.css';
 
 function DetailerUser({ notification }){
     return (
-        <div className="container">
+        <div className="add_margin">
+        <div className="container-fluid">
             <div className="row">
                 <div className="col-md-4">
                     <Card 
@@ -34,6 +35,7 @@ function DetailerUser({ notification }){
                     />
                 </div>
             </div>
+        </div>
         </div>
     )
 }

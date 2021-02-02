@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getUserWashes } from '../../services/user.service';
 import CardWash from './CardWash';
 
-function ViewWashes({ updateNotification }){
+function ViewWashes( { updateNotification} ){
     const [results, setResults] = useState("active");
     const [content, setContent] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const handleNavClick = (e) => {
         const typeResult = e.target;
@@ -14,13 +16,11 @@ function ViewWashes({ updateNotification }){
         typeResult.classList.add("active");
         setResults(typeResult.id);
     };
-
     useEffect(() => {
     updateNotification(null);   
         let newData = [];
         getUserWashes()
         .then((response) => {
-            console.log(response.data.data);
             response.data.data.forEach((element) => {
               if(element.status === results){
                 newData.push(element);
@@ -33,6 +33,7 @@ function ViewWashes({ updateNotification }){
         })
         .catch((e) => {
             setLoading(false);
+            setError('Unable to fetch data');
         })
     }, [results, updateNotification]);
 
@@ -51,13 +52,18 @@ function ViewWashes({ updateNotification }){
             </ul>
             {
                 isLoading ? (
-                        <div className="spinner-border text-primary position-absolute m-auto" style={{ top: 0, left: 0,  bottom: 0, right: 0}} role="status">
+                        <div className="spinner-border text-primary position-absolute m-auto t-0 l-0 b-0 r-0"  role="status">
                             <span className="visually-hidden"></span>
                         </div>
                 ) : (
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             {
+                                error ? ( 
+                                    <div className="center_space d-flex justify-content-center align-items-center">
+                                        <p>Unable to fetch results <Link to="/dashboard">return</Link></p>
+                                    </div>
+                                ) : (
                                 content.map((element) => (
                                     <CardWash 
                                         key={element._id}
@@ -69,6 +75,7 @@ function ViewWashes({ updateNotification }){
                                         work={element.work}
                                     />
                                 ))
+                                )
                             }
                         </div>
                     </div>

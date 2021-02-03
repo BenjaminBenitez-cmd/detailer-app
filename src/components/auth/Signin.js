@@ -101,10 +101,9 @@ const Signin = (props) => {
         </div>
         <div className="col-md-6 order-md-6 order-1">
           <h1 className="display-4 p-0 m-1 w-100">Signin</h1>
-          <h3 className="w-50 font-weight-light">Detailer enables you to schedule and track your washes with one click.</h3>
+          <h3 className="w-50 font-weight-light d-none d-md-block">Detailer enables you to schedule and track your washes with one click.</h3>
         </div>
       </div>
-        
     </div>
   );
 };

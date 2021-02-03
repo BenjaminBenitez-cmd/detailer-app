@@ -66,12 +66,12 @@ function Navbar({ currentUser, logout, navColor }) {
               currentUser ? (
                 <>
                 <li>
-                <Link to={"/dashboard"}>
+                <Link to={"/dashboard"} onClick={handleClick}>
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to={"/profile"}>
+                <Link to={"/profile"} onClick={handleClick}>
                   Account
                 </Link>
               </li>
@@ -84,12 +84,12 @@ function Navbar({ currentUser, logout, navColor }) {
               ) : (
                 <>
                 <li>
-                  <Link to={"/signin"}>
+                  <Link to={"/signin"} onClick={handleClick}>
                     Sign In
                   </Link>
                 </li>
                 <li>
-                  <Link to={"/register"}>
+                  <Link to={"/register"} onClick={handleClick}>
                     Register
                   </Link>
                 </li>

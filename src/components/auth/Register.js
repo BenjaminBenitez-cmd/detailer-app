@@ -27,7 +27,7 @@ function Register(){
     };
 
     const SuccessScreen = () => (
-        <div className="h-100 w-100 d-flex justify-content-center align-items-center flex-column">
+        <div className="d-flex justify-content-center align-items-center flex-column center_space">
             <p>Email sent! Activate your account with email</p>
             <p className="text-primary" onClick={handleRegister} style={{ cursor: 'pointer'}}>Click to resend email</p>
         </div>

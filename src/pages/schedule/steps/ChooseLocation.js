@@ -37,7 +37,9 @@ function ChooseLocation({ updateLocation, goBack }){
                     zoom: 12.5,
                   });
                   getLocation(longitude, latitude);
-                  new mapboxgl.Marker()
+                  new mapboxgl.Marker({
+                      color: '#542020'
+                  })
                       .setLngLat([longitude, latitude])
                       .addTo(map);
 

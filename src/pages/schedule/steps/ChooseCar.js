@@ -1,27 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CardSched from './CardSched';
+import redCar from '../../../assets/img/red-mustang.jpg';
+import blueCar from '../../../assets/img/audi-blue.jfif';
+import whiteCar from '../../../assets/img/white-car.jfif';
+import redTruck from '../../../assets/img/toyota-img.jfif';
+
 
 const cars = [ 
     { 
      title: "Coop",
      alt: "Silver audi", 
-     image: "https://images.unsplash.com/photo-1537126322380-e757d7feb2f3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80" 
+     image: blueCar 
     },
     { 
      title: "SUV",
      alt: "Ford Explorer", 
-     image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" 
+     image:  whiteCar
     },
     { 
      title: "Car",
      alt: "Lamborghini", 
-     image: "https://cdn.pixabay.com/photo/2017/05/23/20/08/mustang-2338377_1280.jpg" 
+     image: redCar 
     },
     { 
      title: "Truck",
      alt: "Red Toyota Tacoma", 
-     image: "https://images.unsplash.com/photo-1603598154505-0192e5365a35?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80" 
+     image: redTruck
     },
 ]
 

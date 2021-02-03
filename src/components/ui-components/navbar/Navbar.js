@@ -33,7 +33,7 @@ function Navbar({ currentUser, logout, navColor }) {
                 </li>
                 <li>
                   <Link to={"/profile"}>
-                    Account
+                    {currentUser.user.username}
                   </Link>
                 </li>
                 <li>

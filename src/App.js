@@ -15,6 +15,7 @@ import Schedule from './pages/schedule/Schedule';
 import { ViewWash, ViewWashes } from './pages/washes';
 
 import Navbar from './components/ui-components/navbar/Navbar';
+import Notfound from './pages/notfound/Notfound';
 
 
 function App(){
@@ -64,6 +65,7 @@ function App(){
             <GuardedRoute exact path="/schedule" updateNotification={updateNotification} component={Schedule}/> 
             <GuardedRoute exact path="/washes" updateNotification={updateNotification} component={ViewWashes} />
             <GuardedRoute exact path="/washes/:id" component={ViewWash} />  
+            <Route component={Notfound}/>
           </Switch>
       </div>
     </>

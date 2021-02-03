@@ -52,9 +52,11 @@ function ViewWashes( { updateNotification} ){
             </ul>
             {
                 isLoading ? (
+                    <div className="center_space d-flex justify-content-center align-items-center">
                         <div className="spinner-border text-primary position-absolute m-auto t-0 l-0 b-0 r-0"  role="status">
                             <span className="visually-hidden"></span>
                         </div>
+                    </div>
                 ) : (
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

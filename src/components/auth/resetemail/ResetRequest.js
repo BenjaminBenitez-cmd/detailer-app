@@ -9,7 +9,7 @@ function ResetRequest() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     
     const onChangeEmail = (e) => {
         setEmail(e.target.value);

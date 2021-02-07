@@ -37,7 +37,7 @@ function App(){
   //logs out user
   const logOut = () => {
     logout();
-    window.location.reload();
+    setCurrentUser(undefined);
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function App(){
 
   return (
     <>
-      <Navbar logout={logOut} currentUser={currentUser} navColor={navColor}/>
+      <Navbar logout={logOut} currentUser={currentUser} logOut={logOut} navColor={navColor}/>
       <div>
           <Switch>
             <Route exact path={["/", "/home"]}>

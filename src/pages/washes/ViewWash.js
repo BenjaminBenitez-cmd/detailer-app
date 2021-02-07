@@ -38,23 +38,19 @@ function ViewWash(){
         getUserWash(id)
         .then((response) => {
             setContent(response.data.data);
+            getUserLocation(response.data.data.longitude, response.data.data.latitude)
+            .then((response) => setLocation(response.data.features[0].place_name))
         })
         .catch(() => {
             setError(true);
         })
     }, [id]);  
-
-    useEffect(() => {
-        getUserLocation(content.longitude, content.latitude).then((response) => {
-            setLocation(response.data.features[0].place_name);
-        })    
-    }, [content])
     
     return (
         <div className="add_margin position-relative" style={{height: 'inherit'}}>
             {
                 error ? (
-                    <div className="center_space ">Unable to fetch details <Link to="/washes">return</Link></div>
+                    <div className="center_space d-flex justify-content-center align-items-center">Unable to fetch details <Link to="/washes">return</Link></div>
                 ) : (
                     <div className="container-fluid ">
                         <div className="row">

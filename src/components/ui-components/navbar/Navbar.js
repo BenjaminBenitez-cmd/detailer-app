@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../../assets/img/logo.svg';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from './Navbar.module.css';
 
-function Navbar({ currentUser, logout, navColor }) {
+function Navbar({ currentUser, logOut, navColor }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClick = () => {
@@ -37,7 +37,7 @@ function Navbar({ currentUser, logout, navColor }) {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" onClick={logout}>
+                  <Link to="/" onClick={logOut}>
                     Logout
                   </Link>
                 </li>
@@ -76,7 +76,7 @@ function Navbar({ currentUser, logout, navColor }) {
                 </Link>
               </li>
               <li>
-                <Link to="/" onClick={logout}>
+                <Link to="/" onClick={logOut}>
                   Logout
                 </Link>
               </li>

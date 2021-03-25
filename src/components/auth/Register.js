@@ -88,7 +88,7 @@ function Register(){
                 <div style={{height: '100px'}}></div>
                 <div className="row align-items-center">
                     <div className="col-md-6">
-                        <p className="h3 p-3"><span className="display-4">Register</span> to start detailing your car with one click.</p>
+                        <p className="p-3"><span className="display-4">Register</span> and keep your car happy!</p>
                     </div>
                     <div className="col-md-6 d-flex align-content-center">
                         <div className="card card-container p-3 mt-lg-5" style={{ width: '30rem'}}>

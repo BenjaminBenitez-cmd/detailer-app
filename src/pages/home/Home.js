@@ -25,7 +25,7 @@ function Home({ updateNav }){
                             <img src={threeMockups} className={`img-fluid ${styles.hero_image} pt-5 pb-5`} alt="Images showing mockups of the app"/>
                         </div>  
                         <div className="col-xs-12 col-sm-6 d-flex align-items-center justify-content-center">
-                            <h1>Detailing Made Easy and Fast</h1>
+                            <h1 className={styles.primaryCTA}>Detailing Made Easy and Fast</h1>
                         </div>
                     </div>
                 </div>

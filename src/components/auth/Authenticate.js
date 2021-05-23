@@ -16,8 +16,7 @@ function Authenticate() {
         }, 
         () => {
             setMessage("Invalid or Expired Token");
-        }
-    )
+        })
         .catch(e => {
             setMessage("Unable to connect to server");
         })

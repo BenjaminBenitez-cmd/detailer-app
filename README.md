@@ -1,5 +1,6 @@
 # detailer-app
-A web application for booking car washes.
+A web application for booking car washes. View a live demo of this application [https://detailer.netlify.app/](https://detailer.netlify.app/)
+
 ![Detailer Mockup](https://www.bbenitez.tech/images/01-%20Browser%20Mockup.jpg)
 
 ## Project Overview

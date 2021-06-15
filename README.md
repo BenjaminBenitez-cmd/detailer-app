@@ -1,5 +1,5 @@
 # detailer-app
-A web application for booking car washes. View a live demo of this application [https://detailer.netlify.app/](https://detailer.netlify.app/)
+Full-stack web application using React, Express and MongoDB. View a live demo of this application [https://detailer.netlify.app/](https://detailer.netlify.app/)
 
 ![Detailer Mockup](https://www.bbenitez.tech/images/01-%20Browser%20Mockup.jpg)
 
